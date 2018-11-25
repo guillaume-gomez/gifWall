@@ -76,7 +76,7 @@
     }
     scene = new THREE.Scene();
 
-    const fov = 15;
+    const fov = 45;
     const width = renderer.domElement.width;
     const height = renderer.domElement.height;
     const aspect = width / height; // view aspect ratio
