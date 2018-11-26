@@ -26,6 +26,7 @@
     img.width = WIDTH;
     img.height = HEIGHT;
     img.className = className;
+    console.log(parent)
     parent.appendChild(img);
   }
 
@@ -125,9 +126,7 @@
       //mesh.position.z = getRandomInt(-500, -100);
       scene.add(mesh);
     }
-
-    setInterval("update()", 30);
-    update();
+    setInterval(update, 30);
   }
 
   function writeRow(positionRef, nbItemsByRow, yOFFSET) {
@@ -189,4 +188,6 @@
       initScene();
     }
     setTimeout(loadFunction, 100);
+
+    document.body.onmousemove = update();
   }
