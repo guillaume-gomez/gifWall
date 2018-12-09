@@ -26,7 +26,6 @@
     img.width = WIDTH;
     img.height = HEIGHT;
     img.className = className;
-    console.log(parent)
     parent.appendChild(img);
   }
 
@@ -52,14 +51,17 @@
 
     Object.entries(gifsCache).forEach(([key, values]) => {
       const gifLoadedPromised = new Promise(function(resolve, reject) {
-          values.data.load(() => { 
+          values.data.load(() => {
             resolve("ok");
           });
         });
         promises.push(gifLoadedPromised);
     });
-    
+
     Promise.all(promises).then(function(values) {
+      //document.getElementById('previewContainer').style.display = 'none';
+      console.log("jkjjjkdsfjskdfjk");
+      initScene();
       start(gifs, gifsCache);
     });
   }
@@ -185,7 +187,7 @@
     createImgTags();
     const loadFunction = () => {
       init();
-      initScene();
+      //initScene();
     }
     setTimeout(loadFunction, 100);
 
