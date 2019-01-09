@@ -14,6 +14,9 @@
     const urls = JSON.parse(decodeURI(convertedParams)).data || ["https://media.giphy.com/media/nXxOjZrbnbRxS/giphy.gif"];
     console.log(urls)
     for(let i = 0; i < urls.length; i++) {
+      if(urls[i] === "" || !urls[i]) {
+        continue;
+      }
       createImgTag(previewContainer, `gif${i+1}`, urls[i]);
     }
     return urls.length;
