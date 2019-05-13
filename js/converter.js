@@ -2,7 +2,7 @@ function submit(redirection, hasUrl) {
   var textarea = document.getElementById("textarea");
   var result = convertToJsonParam(textarea.value, hasUrl);
   var encodedResult = encodeURI(JSON.stringify(result));
-  window.location.replace(`${redirection}?text=${btoa(encodedResult)}`);
+  window.open(`${redirection}?text=${btoa(encodedResult)}`);
 }
 
 function convertToJsonParam(text, hasUrl) {
