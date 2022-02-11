@@ -112,20 +112,17 @@
     const positions = setPositions(gifs.length);
     for(let i = 0; i < positions.length; i++) {
       const gifcanvas = gifs[i].get_canvas();
-      //TODO IMPROVE
-      gifcanvas.width = WIDTH;
-      gifcanvas.height = HEIGHT;
-
       // MATERIAL
+      const texture =  new THREE.Texture(gifcanvas);
       const material = new THREE.MeshStandardMaterial({
-        color: 0xffffff
+        color: 0xffffff,
+        map: texture
       });
-      material.map = new THREE.Texture( gifcanvas);
       material.displacementMap = material.map;
       materials.push(material);
       // GEOMETRY
-      const geometry = new THREE.PlaneGeometry(WIDTH, HEIGHT, WIDTH, HEIGHT);
-      const mesh = new THREE.Mesh( geometry, material);
+      const geometry = new THREE.PlaneGeometry(WIDTH, HEIGHT);
+      const mesh = new THREE.Mesh(geometry, material);
       mesh.rotation.y = Math.PI;
       mesh.position.x = positions[i].x;
       mesh.position.y = positions[i].y;
