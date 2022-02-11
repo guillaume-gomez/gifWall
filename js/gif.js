@@ -112,8 +112,10 @@
     const positions = setPositions(gifs.length);
     for(let i = 0; i < positions.length; i++) {
       const gifcanvas = gifs[i].get_canvas();
+      //TODO IMPROVE
       gifcanvas.width = WIDTH;
       gifcanvas.height = HEIGHT;
+
       // MATERIAL
       const material = new THREE.MeshStandardMaterial({
         color: 0xffffff
@@ -131,7 +133,6 @@
       //mesh.position.z = getRandomInt(-500, -100);
       scene.add(mesh);
     }
-    setInterval(update, 30);
   }
 
   function writeRow(positionRef, nbItemsByRow, yOFFSET) {
@@ -179,8 +180,9 @@
       materials[i].map.needsUpdate = true;
     }
     render();
-    controls.update(); // trackball interaction
+    window.requestAnimationFrame(update);
   }
+
   function render() {
     if(renderer) {
       renderer.clear();
@@ -188,7 +190,9 @@
     }
   }
 
+
   window.onload = function() {
     createImgTags();
     init();
+    update();
   }
