@@ -1,5 +1,5 @@
   let camera, scene, renderer, container;
-  let light, pointLight;
+  let pointLight;
   let controls = null;
   let materials = [];
   const WIDTH = 128;
@@ -90,17 +90,17 @@
     camera.updateMatrix();
     controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
-    controls.dampingFactor =  0.25;
+    controls.dampingFactor =  0.10;
     controls.enableZoom = true;
-    controls.enablePan = true;
+    controls.enablePan = false;
     controls.enableKeys = false;
     controls.rotateSpeed = 3.0;
     controls.zoomSpeed = 1.2;
     controls.panSpeed = 0.8;
-    controls.staticMoving = true;
-    controls.dynamicDampingFactor = 0.3;
-    controls.addEventListener( 'change', render );
-
+    controls.minPolarAngle = Math.PI/6;
+    controls.maxPolarAngle = Math.PI/2;
+    controls.minAzimuthAngle = Math.PI/2;
+    controls.maxAzimuthAngle = Math.PI;
     // --- Lights
     pointLight = new THREE.PointLight( 0xffffff, 1.0 );
     scene.add( pointLight );
@@ -120,8 +120,7 @@
       const material = new THREE.MeshStandardMaterial({
         color: 0xffffff
       });
-      console.log(gifcanvas)
-      material.map = new THREE.Texture( gifcanvas );
+      material.map = new THREE.Texture( gifcanvas);
       material.displacementMap = material.map;
       materials.push(material);
       // GEOMETRY
@@ -130,7 +129,6 @@
       mesh.rotation.y = Math.PI;
       mesh.position.x = positions[i].x;
       mesh.position.y = positions[i].y;
-      //mesh.position.z = getRandomInt(-500, -100);
       scene.add(mesh);
     }
   }
