@@ -12,7 +12,6 @@
     const url = new URL(window.location);
     const convertedParams = atob(url.searchParams.get("text"));
     const urls = JSON.parse(decodeURI(convertedParams)).data || ["https://media.giphy.com/media/nXxOjZrbnbRxS/giphy.gif"];
-    console.log(urls)
     for(let i = 0; i < urls.length; i++) {
       if(urls[i] === "" || !urls[i]) {
         continue;
@@ -62,8 +61,6 @@
     });
 
     Promise.all(promises).then(function(values) {
-      //document.getElementById('previewContainer').style.display = 'none';
-      console.log("jkjjjkdsfjskdfjk");
       initScene();
       start(gifs, gifsCache);
     });
@@ -115,10 +112,13 @@
     const positions = setPositions(gifs.length);
     for(let i = 0; i < positions.length; i++) {
       const gifcanvas = gifs[i].get_canvas();
+      gifcanvas.width = WIDTH;
+      gifcanvas.height = HEIGHT;
       // MATERIAL
       const material = new THREE.MeshStandardMaterial({
         color: 0xffffff
       });
+      console.log(gifcanvas)
       material.map = new THREE.Texture( gifcanvas );
       material.displacementMap = material.map;
       materials.push(material);
@@ -182,17 +182,13 @@
     controls.update(); // trackball interaction
   }
   function render() {
-    renderer.clear();
-    renderer.render(scene, camera);
+    if(renderer) {
+      renderer.clear();
+      renderer.render(scene, camera);
+    }
   }
 
   window.onload = function() {
     createImgTags();
-    const loadFunction = () => {
-      init();
-      //initScene();
-    }
-    setTimeout(loadFunction, 100);
-
-    document.body.onmousemove = update();
+    init();
   }
