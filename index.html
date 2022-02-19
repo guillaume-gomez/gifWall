@@ -3,18 +3,30 @@
     <head>
         <meta charset=utf-8>
         <title>Gifs X threeJs</title>
+        <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+        <link href="https://cdn.jsdelivr.net/npm/daisyui@2.0.8/dist/full.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <legend>Write or copy/paste the gif urls (warning !  some url may does not work)</legend>
-        <textarea id="textarea" rows="30" cols="100">https://media.giphy.com/media/nXxOjZrbnbRxS/giphy.gif
-https://media.giphy.com/media/TaBMIY5wKBvaw/giphy.gif
-https://media.giphy.com/media/12XMGIWtrHBl5e/giphy.gif
-https://media.giphy.com/media/xUySTxVTWeEtJhEzsY/giphy.gif</textarea>
-        <button onclick="submit('gif.html', true);">go to animation</button>
-        <p>
+        <div class="container">
+            <div class="flex flex-col items-center">
+                <legend>Write or copy/paste the gif urls (warning !  some url may does not work)</legend>
+                <textarea class="textarea textarea-bordered" id="textarea" rows="30" cols="100">https://media.giphy.com/media/nXxOjZrbnbRxS/giphy.gif
+        https://media.giphy.com/media/TaBMIY5wKBvaw/giphy.gif
+        https://media.giphy.com/media/12XMGIWtrHBl5e/giphy.gif
+        https://media.giphy.com/media/xUySTxVTWeEtJhEzsY/giphy.gif</textarea>
+                <button class="btn btn-primary" onclick="submit('gif.html', true);">go to animation</button>
+            </div>
+        </div>
+        <footer class="p-4 footer bg-base-300 text-base-content footer-center">
+          <div>
+            <p>
             Source
-            <a href="https://github.com/guillaume-gomez/giffWall">here</a>
-        <p>
+                <a class="link" href="https://github.com/guillaume-gomez/giffWall">here</a>
+            <p>
+            <p>Copyright © 2022 - All right reserved by ACME Industries Ltd</p>
+          </div>
+        </footer>
         <script src="js/converter.js"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
     </body>
 </html>
