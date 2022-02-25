@@ -99,7 +99,8 @@
     controls.panSpeed = 0.8;
     controls.minPolarAngle = Math.PI/6;
     controls.maxPolarAngle = Math.PI/2;
-    controls.minAzimuthAngle = Math.PI/2;
+    //controls.minAzimuthAngle = Math.PI/2;
+    controls.minAzimuthAngle = -Math.PI;
     controls.maxAzimuthAngle = Math.PI;
     // --- Lights
     pointLight = new THREE.PointLight( 0xffffff, 1.0 );
