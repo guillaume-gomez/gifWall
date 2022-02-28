@@ -10,7 +10,7 @@
     "webpack-cli": "^3.1.2"
   },
   "scripts": {
-     "develop": "webpack --mode development --watch",
+     "dev": "webpack --mode development --watch",
      "build": "webpack --mode production"
   }
 }

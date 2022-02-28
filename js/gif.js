@@ -1,5 +1,5 @@
   let camera, scene, renderer, container;
-  let light, pointLight;
+  let pointLight;
   let controls = null;
   let materials = [];
   const WIDTH = 128;
@@ -12,8 +12,10 @@
     const url = new URL(window.location);
     const convertedParams = atob(url.searchParams.get("text"));
     const urls = JSON.parse(decodeURI(convertedParams)).data || ["https://media.giphy.com/media/nXxOjZrbnbRxS/giphy.gif"];
-    console.log(urls)
     for(let i = 0; i < urls.length; i++) {
+      if(urls[i] === "" || !urls[i]) {
+        continue;
+      }
       createImgTag(previewContainer, `gif${i+1}`, urls[i]);
     }
     return urls.length;
@@ -59,8 +61,6 @@
     });
 
     Promise.all(promises).then(function(values) {
-      //document.getElementById('previewContainer').style.display = 'none';
-      console.log("jkjjjkdsfjskdfjk");
       initScene();
       start(gifs, gifsCache);
     });
@@ -90,17 +90,18 @@
     camera.updateMatrix();
     controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
-    controls.dampingFactor =  0.25;
+    controls.dampingFactor =  0.10;
     controls.enableZoom = true;
-    controls.enablePan = true;
+    controls.enablePan = false;
     controls.enableKeys = false;
     controls.rotateSpeed = 3.0;
     controls.zoomSpeed = 1.2;
     controls.panSpeed = 0.8;
-    controls.staticMoving = true;
-    controls.dynamicDampingFactor = 0.3;
-    controls.addEventListener( 'change', render );
-
+    controls.minPolarAngle = Math.PI/6;
+    controls.maxPolarAngle = Math.PI/2;
+    //controls.minAzimuthAngle = Math.PI/2;
+    controls.minAzimuthAngle = -Math.PI;
+    controls.maxAzimuthAngle = Math.PI;
     // --- Lights
     pointLight = new THREE.PointLight( 0xffffff, 1.0 );
     scene.add( pointLight );
@@ -113,22 +114,21 @@
     for(let i = 0; i < positions.length; i++) {
       const gifcanvas = gifs[i].get_canvas();
       // MATERIAL
+      const texture =  new THREE.Texture(gifcanvas);
       const material = new THREE.MeshStandardMaterial({
-        color: 0xffffff
+        color: 0xffffff,
+        map: texture
       });
-      material.map = new THREE.Texture( gifcanvas );
       material.displacementMap = material.map;
       materials.push(material);
       // GEOMETRY
-      const geometry = new THREE.PlaneGeometry(WIDTH, HEIGHT, WIDTH, HEIGHT);
-      const mesh = new THREE.Mesh( geometry, material);
+      const geometry = new THREE.PlaneGeometry(WIDTH, HEIGHT);
+      const mesh = new THREE.Mesh(geometry, material);
       mesh.rotation.y = Math.PI;
       mesh.position.x = positions[i].x;
       mesh.position.y = positions[i].y;
-      //mesh.position.z = getRandomInt(-500, -100);
       scene.add(mesh);
     }
-    setInterval(update, 30);
   }
 
   function writeRow(positionRef, nbItemsByRow, yOFFSET) {
@@ -176,20 +176,19 @@
       materials[i].map.needsUpdate = true;
     }
     render();
-    controls.update(); // trackball interaction
+    window.requestAnimationFrame(update);
   }
+
   function render() {
-    renderer.clear();
-    renderer.render(scene, camera);
+    if(renderer) {
+      renderer.clear();
+      renderer.render(scene, camera);
+    }
   }
+
 
   window.onload = function() {
     createImgTags();
-    const loadFunction = () => {
-      init();
-      //initScene();
-    }
-    setTimeout(loadFunction, 100);
-
-    document.body.onmousemove = update();
+    init();
+    update();
   }
