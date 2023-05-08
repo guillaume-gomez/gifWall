@@ -1,1 +1,100 @@
-!function(e){var t={};function n(o){if(t[o])return t[o].exports;var r=t[o]={i:o,l:!1,exports:{}};return e[o].call(r.exports,r,r.exports,n),r.l=!0,r.exports}n.m=e,n.c=t,n.d=function(e,t,o){n.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:o})},n.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},n.t=function(e,t){if(1&t&&(e=n(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var o=Object.create(null);if(n.r(o),Object.defineProperty(o,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var r in e)n.d(o,r,function(t){return e[t]}.bind(null,r));return o},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p="",n(n.s=0)}([function(e,t){let n,o,r,a,i,l=null,c=[];const s=128,u=128,d=5;function f(e,t,n,o="gifClass"){let r=document.createElement("img");r.src=n,r.id=t,r.width=s,r.height=u,r.className=o,e.appendChild(r)}function p(){a=document.getElementById("container");let e=[],t={},f=[];const p=document.getElementsByClassName("gifClass");for(let n=0;n<p.length;n++){const o=p[n].src;let r=null;t[o]?(r=t[o].data,t[o].indexes.push(n)):(r=new SuperGif({gif:p[n]}),t[o]={data:r,indexes:[n]}),e[n]=r}Object.entries(t).forEach(([e,t])=>{const n=new Promise(function(e,n){t.data.load(()=>{e("ok")})});f.push(n)}),Promise.all(f).then(function(t){!function(){try{(r=new THREE.WebGLRenderer).setSize(window.innerWidth,window.innerHeight),r.autoClear=!1,a.appendChild(r.domElement)}catch(e){alert(e)}o=new THREE.Scene;const e=r.domElement.width,t=r.domElement.height,c=e/t;(n=new THREE.PerspectiveCamera(45,c)).position.z=-600,n.position.y=-800,n.lookAt(o.position),n.updateMatrix(),(l=new THREE.OrbitControls(n,r.domElement)).enableDamping=!0,l.dampingFactor=.1,l.enableZoom=!0,l.enablePan=!1,l.enableKeys=!1,l.rotateSpeed=3,l.zoomSpeed=1.2,l.panSpeed=.8,l.minPolarAngle=Math.PI/6,l.maxPolarAngle=Math.PI/2,l.minAzimuthAngle=-Math.PI,l.maxAzimuthAngle=Math.PI,i=new THREE.PointLight(16777215,1),o.add(i),i.position.set(0,100,-800)}(),function(e,t){const n=function(e){let t=e/2*(s+d),n=[];switch(e){case 3:t=s-s/2;for(let e=0;e<2;e++)n.push({x:(s+d)*e-t,y:0,z:0});n.push({x:0,y:u+d,z:0});break;case 1:case 2:for(let o=0;o<e;o++)n.push({x:(s+d)*o-t,y:0,z:0});break;default:const o=5,r=Math.floor(e/o);let a=Math.round(r/2)*u-u/2;for(let e=0;e<r;e++)n=m(n,o,e*(u+d)-a);n=m(n,e%o,r*(u+d)-a)}return n}(e.length);for(let t=0;t<n.length;t++){const r=e[t].get_canvas(),a=new THREE.Texture(r),i=new THREE.MeshStandardMaterial({color:16777215,map:a});i.displacementMap=i.map,c.push(i);const l=new THREE.PlaneGeometry(s,u),d=new THREE.Mesh(l,i);d.rotation.y=Math.PI,d.position.x=n[t].x,d.position.y=n[t].y,o.add(d)}}(e)})}function m(e,t,n){let o=e.slice(),r=t/2*(s+d)-s/2;for(let e=0;e<t;e++)o.push({x:(s+d)*e-r,y:n,z:0});return o}function h(){for(let e=0;e<c.length;e++)c[e].map.needsUpdate=!0;r&&(r.clear(),r.render(o,n)),window.requestAnimationFrame(h)}window.onload=function(){!function(){const e=document.getElementById("previewContainer"),t=new URL(window.location),n=atob(t.searchParams.get("text")),o=JSON.parse(decodeURI(n)).data||["https://media.giphy.com/media/nXxOjZrbnbRxS/giphy.gif"];for(let t=0;t<o.length;t++)""!==o[t]&&o[t]&&f(e,`gif${t+1}`,o[t]);o.length}(),p(),h()}}]);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./js/gif.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./js/gif.js":
+/*!*******************!*\
+  !*** ./js/gif.js ***!
+  \*******************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("  let camera, scene, renderer, container;\r\n  let pointLight;\r\n  let controls = null;\r\n  let materials = [];\r\n  const WIDTH = 128;\r\n  const HEIGHT = 128;\r\n  const OFFSET = 5;\r\n\r\n  function createImgTags() {\r\n    const previewContainer = document.getElementById('previewContainer');\r\n    //get the gif urls from the url params\r\n    const url = new URL(window.location);\r\n    const convertedParams = atob(url.searchParams.get(\"text\"));\r\n    const urls = JSON.parse(decodeURI(convertedParams)).data || [\"https://media.giphy.com/media/nXxOjZrbnbRxS/giphy.gif\"];\r\n    for(let i = 0; i < urls.length; i++) {\r\n      if(urls[i] === \"\" || !urls[i]) {\r\n        continue;\r\n      }\r\n      createImgTag(previewContainer, `gif${i+1}`, urls[i]);\r\n    }\r\n    return urls.length;\r\n  }\r\n\r\n  function createImgTag(parent, id, url, className = \"gifClass\") {\r\n    let img = document.createElement('img');\r\n    img.src = url;\r\n    img.id = id;\r\n    img.width = WIDTH;\r\n    img.height = HEIGHT;\r\n    img.className = className;\r\n    parent.appendChild(img);\r\n  }\r\n\r\n  function init() {\r\n    container = document.getElementById( 'container' );\r\n    let gifs = [];\r\n    let gifsCache = {};\r\n    let promises = [];\r\n    const gifItems = document.getElementsByClassName('gifClass');\r\n    //load gifs from the dom\r\n    for(let i = 0; i < gifItems.length ; i++) {\r\n      const url = gifItems[i].src;\r\n      let gif = null;\r\n      if(!gifsCache[url]) {\r\n        gif = new SuperGif({ gif: gifItems[i] } );\r\n        gifsCache[url] = { data: gif, indexes: [i] }\r\n      } else {\r\n        gif = gifsCache[url].data;\r\n        gifsCache[url].indexes.push(i)\r\n      }\r\n      gifs[i] = gif;\r\n    }\r\n\r\n    Object.entries(gifsCache).forEach(([key, values]) => {\r\n      const gifLoadedPromised = new Promise(function(resolve, reject) {\r\n          values.data.load(() => {\r\n            resolve(\"ok\");\r\n          });\r\n        });\r\n        promises.push(gifLoadedPromised);\r\n    });\r\n\r\n    Promise.all(promises).then(function(values) {\r\n      initScene();\r\n      start(gifs, gifsCache);\r\n    });\r\n  }\r\n\r\n  function initScene() {\r\n     // WebGl render\r\n    try {\r\n      renderer = new THREE.WebGLRenderer();\r\n      renderer.setSize( window.innerWidth, window.innerHeight );\r\n      renderer.autoClear = false;\r\n      container.appendChild( renderer.domElement );\r\n    }\r\n    catch (e) {\r\n       alert(e);\r\n    }\r\n    scene = new THREE.Scene();\r\n\r\n    const fov = 45;\r\n    const width = renderer.domElement.width;\r\n    const height = renderer.domElement.height;\r\n    const aspect = width / height; // view aspect ratio\r\n    camera = new THREE.PerspectiveCamera( fov, aspect );\r\n    camera.position.z = -600;\r\n    camera.position.y = -800;\r\n    camera.lookAt(scene.position);\r\n    camera.updateMatrix();\r\n    controls = new THREE.OrbitControls(camera, renderer.domElement);\r\n    controls.enableDamping = true;\r\n    controls.dampingFactor =  0.10;\r\n    controls.enableZoom = true;\r\n    controls.enablePan = false;\r\n    controls.enableKeys = false;\r\n    controls.rotateSpeed = 3.0;\r\n    controls.zoomSpeed = 1.2;\r\n    controls.panSpeed = 0.8;\r\n    controls.minPolarAngle = Math.PI/6;\r\n    controls.maxPolarAngle = Math.PI/2;\r\n    //controls.minAzimuthAngle = Math.PI/2;\r\n    controls.minAzimuthAngle = -Math.PI;\r\n    controls.maxAzimuthAngle = Math.PI;\r\n    // --- Lights\r\n    pointLight = new THREE.PointLight( 0xffffff, 1.0 );\r\n    scene.add( pointLight );\r\n    pointLight.position.set(0, 100, -800);\r\n  }\r\n\r\n\r\n  function start(gifs, gifsCache) {\r\n    const positions = setPositions(gifs.length);\r\n    for(let i = 0; i < positions.length; i++) {\r\n      const gifcanvas = gifs[i].get_canvas();\r\n      // MATERIAL\r\n      const texture =  new THREE.Texture(gifcanvas);\r\n      const material = new THREE.MeshStandardMaterial({\r\n        color: 0xffffff,\r\n        map: texture\r\n      });\r\n      material.displacementMap = material.map;\r\n      materials.push(material);\r\n      // GEOMETRY\r\n      const geometry = new THREE.PlaneGeometry(WIDTH, HEIGHT);\r\n      const mesh = new THREE.Mesh(geometry, material);\r\n      mesh.rotation.y = Math.PI;\r\n      mesh.position.x = positions[i].x;\r\n      mesh.position.y = positions[i].y;\r\n      scene.add(mesh);\r\n    }\r\n  }\r\n\r\n  function writeRow(positionRef, nbItemsByRow, yOFFSET) {\r\n    let positions = positionRef.slice();\r\n    let middleX = (nbItemsByRow / 2) * (WIDTH + OFFSET) - WIDTH/2;\r\n    for(let column = 0; column < nbItemsByRow; column++) {\r\n      positions.push({x: - middleX + ((WIDTH + OFFSET) * column), y: yOFFSET, z: 0});\r\n    }\r\n    return positions;\r\n  }\r\n\r\n  function setPositions(nbItems) {\r\n    let middle = (nbItems / 2) * (WIDTH + OFFSET);\r\n    let positions = [];\r\n    switch(nbItems) {\r\n      case 3:\r\n        middle = WIDTH - WIDTH/2;\r\n        for(let i = 0; i < 2; i++) {\r\n          positions.push({x: - middle + ((WIDTH + OFFSET) * i), y: 0, z: 0});\r\n        }\r\n        positions.push({x: 0, y: HEIGHT + OFFSET, z:0});\r\n      break;\r\n      case 1:\r\n      case 2:\r\n        for(let i = 0; i < nbItems; i++) {\r\n          positions.push({x: - middle + ((WIDTH + OFFSET) * i), y: 0, z: 0});\r\n        }\r\n      break;\r\n      default:\r\n        const itemsByRow = 5;\r\n        const rows = Math.floor(nbItems / itemsByRow);\r\n        let middleY = (Math.round((rows / 2)) * HEIGHT) - HEIGHT/2;\r\n        for(let row = 0; row < rows; row++) {\r\n          positions = writeRow(positions, itemsByRow, - middleY + row * (HEIGHT + OFFSET));\r\n        }\r\n        positions = writeRow(positions, nbItems % itemsByRow, - middleY + rows * (HEIGHT + OFFSET));\r\n      break\r\n    }\r\n    return positions;\r\n  }\r\n\r\n  function update() {\r\n    // todo check controls and renderer\r\n    for(let i = 0; i < materials.length; i++) {\r\n      materials[i].map.needsUpdate = true;\r\n    }\r\n    render();\r\n    window.requestAnimationFrame(update);\r\n  }\r\n\r\n  function render() {\r\n    if(renderer) {\r\n      renderer.clear();\r\n      renderer.render(scene, camera);\r\n    }\r\n  }\r\n\r\n\r\n  window.onload = function() {\r\n    createImgTags();\r\n    init();\r\n    update();\r\n  }\n\n//# sourceURL=webpack:///./js/gif.js?");
+
+/***/ })
+
+/******/ });
