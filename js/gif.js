@@ -63,6 +63,7 @@
     Promise.all(promises).then(function(values) {
       initScene();
       start(gifs, gifsCache);
+      initShareButton();
     });
   }
 
@@ -186,6 +187,26 @@
     }
   }
 
+
+  function initShareButton() {
+    const button = document.getElementById('copyToClipboardButton');
+    button.addEventListener('click', copyToClipboard);
+    button.addEventListener('mouseout', outCopyToClipboard);
+    button.style.display = "block";
+  }
+
+  function copyToClipboard() {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url);
+
+    const tooltip = document.getElementById("myTooltip");
+    tooltip.innerHTML = "Link copied !";
+  }
+
+  function outCopyToClipboard() {
+    const tooltip = document.getElementById("myTooltip");
+    tooltip.innerHTML = "Copy to clipboard ?";
+  }
 
   window.onload = function() {
     createImgTags();
